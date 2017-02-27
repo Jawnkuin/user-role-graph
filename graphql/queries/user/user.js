@@ -1,5 +1,6 @@
 import {GraphQLInt} from 'graphql';
 import userType from '../../types/user';
+import UserModel from '../../../model/user';
 
 
 export default {
@@ -15,6 +16,6 @@ export default {
     if (!id) {
       id = 1;
     }
-    return root.data.getUser(id);
+    return UserModel.findOne({id});
   }
 };

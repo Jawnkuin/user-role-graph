@@ -1,5 +1,6 @@
 import {GraphQLInt} from 'graphql';
 import roleType from '../../types/role';
+import RoleModel from '../../../model/role';
 
 
 export default {
@@ -15,6 +16,6 @@ export default {
     if (!id) {
       id = 1;
     }
-    return root.data.getUsers(id)[0];
+    return RoleModel.findOne({id});
   }
 };

@@ -4,6 +4,7 @@ import {
   GraphQLInt,
   GraphQLList
 } from 'graphql';
+import RoleModel from '../../model/role';
 import roleType from './role';
 
 const userType = new GraphQLObjectType({
@@ -13,8 +14,11 @@ const userType = new GraphQLObjectType({
     name: {type: GraphQLString},
     roles: {
       type: new GraphQLList(roleType),
-      resolve (parent, args, context, {rootValue: {data}}) {
-        return data.getRoles(parent.roles);
+      resolve (parent) {
+        const roles = RoleModel.find({id: {
+          $in: parent.roles
+        }});
+        return roles;
       }
     }
   }

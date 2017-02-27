@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "ava",
-    "start": "node ./index.js"
+    "start": "node ./index.js",
+    "seed": "node ./seed"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-client": "^0.9.0",
     "babel": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
@@ -25,7 +27,17 @@
     "express": "^4.14.1",
     "express-graphql": "^0.6.3",
     "graphql": "^0.9.1",
-    "lodash": "^4.17.4"
+    "graphql-tag": "^1.2.4",
+    "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.4",
+    "material-ui": "^0.17.0",
+    "mongoose": "^4.8.5",
+    "react": "^15.4.2",
+    "react-apollo": "^0.12.0",
+    "react-dom": "^15.4.2",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "eslint": "^3.16.0",

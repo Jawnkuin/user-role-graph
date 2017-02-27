@@ -2,11 +2,29 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./static/angular-material.min.css">
     <title>User Role Graphql</title>
-    <script src="./main.js"></script>
   </head>
-  <body>
-    <p>Hello World</p>
+  <body ng-app='graphApp' ng-cloak ng-controller='graphControl'>
+    <md-list>
+      <md-subheader class="md-no-sticky">Users</md-subheader>
+      <md-item ng-repeat='user in data.users'>
+        <p ng-click="onUserClicked(user)">{{user.name}}</p>
+      </md-item>
+    </md-list>
 
+    <md-list>
+      <md-subheader class="md-no-sticky">Roles</md-subheader>
+      <md-item ng-repeat='role in data.roles'>
+        <p ng-click="onRoleClicked(role.id)">{{role.name}}</p>
+      </md-item>
+    </md-list>
+    <script src="./static/angular.min.js"></script>
+    <script src="./static/angular-animate.min.js"></script>
+    <script src="./static/angular-aria.min.js"></script>
+    <script src="./static/angular-messages.min.js"></script>
+    <script src="./static/angular-material.min.js"></script>
+    <script src="./main.js"></script>
   </body>
 </html>

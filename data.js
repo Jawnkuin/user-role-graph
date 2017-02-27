@@ -11,7 +11,7 @@ class DB {
               {id: 7, name: 'Gyrocopter​', roles: [2, 5, 4]},
               {id: 8, name: 'Huskar', roles: [2, 3, 6]},
               {id: 9, name: 'Invoker', roles: [2, 5, 4, 7, 6]},
-              {id: 10, name: 'Juggernaut', roles: []}
+              {id: 10, name: 'Juggernaut', roles: [2, 5]}
       ],
       roles: [
               {id: 1, name: 'Support'},

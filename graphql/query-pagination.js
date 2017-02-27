@@ -1,13 +1,13 @@
 import forEach from 'lodash/forEach';
 import {
-  GraphQLString
+  GraphQLInt
 } from 'graphql';
 
 
 export const paginationQueryArgs = {
   role: {
     name: 'role',
-    type: GraphQLString
+    type: GraphQLInt
   }
 };
 

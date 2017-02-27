@@ -1,16 +1,20 @@
 import {GraphQLList} from 'graphql';
 import userType from '../../types/user';
 import {paginationQueryArgs} from '../../query-pagination';
+import UserModel from '../../../model/user';
+import RoleModel from '../../../model/role';
 
 export default {
   type: new GraphQLList(userType),
   args: {
     ...paginationQueryArgs
   },
-  resolve (root, params) {
+  async resolve (root, params) {
     if (!params.role) {
-      return root.data.db.users;
+      return UserModel.find();
     }
-    return root.data.getUsersByRoles(params.role);
+    const role = await RoleModel.findOne({id: params.role}).exec();
+    const users = await UserModel.find({roles: role.id}).exec();
+    return users;
   }
 };

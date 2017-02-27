@@ -1,26 +1,28 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import sysData from './data';
+import mongoose from 'mongoose';
 import schema from './graphql';
 
 const app = express();
-
+const port = 3000;
+mongoose.Promise = global.Promise;
+const db = mongoose.connect('mongodb://localhost/userrole');
 app.use(bodyParser.urlencoded({extnded: false}));
 app.use(bodyParser.json({limit: 100000000}));
 
 app.use('/graphql', graphqlHTTP({
   schema: schema.getSchema(),
   rootValue: {
-    data: sysData
+    data: db
   },
   graphiql: true
 }));
 
 app.use(express.static('public'));
 
-app.listen(3000, () => {
-  console.log('start at localhost:3000');
+app.listen(port, () => {
+  console.log(`start at localhost:${port}`);
 });
 
 export default app;
