@@ -1,19 +1,5 @@
-import fetch from 'isomorphic-fetch';
+import {fetchUsers} from './Users';
 
-// export const SELECT_USER = 'SELECT_USER';
-export const REQUEST_ROLES = 'REQUEST_USERS';
-export const RECEIVE_ROLES = 'RECEIVE_USERS';
+export const CLICK_ROLE = 'CLICK_ROLE';
 
-export const receiveRoles = uid => (
-  {
-    type: RECEIVE_ROLES,
-    uid
-  }
-);
-
-export const requestRoles = uid => (
-  {
-    type: REQUEST_ROLES,
-    uid
-  }
-);
+export const clickRole = rid => dispatch => dispatch(fetchUsers(rid));

@@ -1,35 +1,35 @@
-import Immutable from 'immutable';
-import {UsersActions, RolesActions} from '../actions';
+import {UsersActions} from '../actions';
 
-const iMap = Immutable.Map;
-const immutableState = iMap({
+const immutableState = {
   fetching: false,
-  data: iMap({
-    roles: iMap({}),
-    users: iMap({})
-  })
-});
+  data: {
+    roles: [],
+    users: []
+  }
+};
 
-export const queryUsersReducer = (state = immutableState, action) => {
+const rootReducer = (state = immutableState, action) => {
   switch (action.type) {
     case UsersActions.REQUEST_USERS:
-      return state.set('fetching', true);
+      return Object.assign({}, state, {
+        fetching: true
+      });
     case UsersActions.RECEIVE_USERS:
-      return state.set('fetching', false)
-      .data.set('users', iMap(action.users));
+      return {
+        fetching: false,
+        data: Object.assign({}, state.data, {
+          users: action.users
+        })
+      };
+    case UsersActions.CLICK_USER:
+      return Object.assign({}, state, {
+        data: Object.assign({}, state.data, {
+          roles: action.roles
+        })
+      });
     default:
       return state;
   }
 };
 
-export const queryRolesReducer = (state = immutableState, action) => {
-  switch (action.type) {
-    case RolesActions.REQUEST_ROLES:
-      return state.set('fetching', true);
-    case RolesActions.RECEIVE_ROLES:
-      return state.set('fetching', false)
-      .data.set('roles', iMap(action.roles));
-    default:
-      return state;
-  }
-};
+export default rootReducer;
