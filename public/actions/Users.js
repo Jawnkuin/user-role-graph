@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+// import fetch from 'isomorphic-fetch';
 
 // export const SELECT_USER = 'SELECT_USER';
 export const REQUEST_USERS = 'REQUEST_USERS';
@@ -33,10 +33,9 @@ export const fetchUsers = (rid) => {
   return (dispatch) => {
     dispatch(requestUsers(rid));
     return fetch(`/graphql?${queryQl}`)
-      .then((res) => {
-        console.log(res.data);
-        return res.data;
-      })
-      .then(data => dispatch(receiveUsers(data)));
+      .then(res => res.json())
+      .then((json) => {
+        dispatch(receiveUsers(json.data.users));
+      });
   };
 };

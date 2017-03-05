@@ -2,7 +2,13 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import mongoose from 'mongoose';
+import webpack from 'webpack';
+import path from 'path';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackConfig from './webpack.config';
 import schema from './graphql';
+
 
 const app = express();
 const port = 3000;
@@ -19,10 +25,17 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
-app.use(express.static('public'));
+const webpackCompiler = webpack(webpackConfig);
+app.use(webpackDevMiddleware(webpackCompiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
+app.use(webpackHotMiddleware(webpackCompiler));
+
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 app.listen(port, () => {
-  console.log(`start at localhost:${port}`);
+  console.info(`start at localhost:${port}`);
 });
 
 export default app;

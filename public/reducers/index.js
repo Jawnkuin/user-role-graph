@@ -1,4 +1,4 @@
-import {UsersActions} from '../actions';
+import * as UsersActions from '../actions/Users';
 
 const immutableState = {
   fetching: false,
@@ -7,6 +7,7 @@ const immutableState = {
     users: []
   }
 };
+
 
 const rootReducer = (state = immutableState, action) => {
   switch (action.type) {

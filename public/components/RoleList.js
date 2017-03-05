@@ -1,16 +1,15 @@
 import React, {PropTypes} from 'react';
-import List from 'material-ui/List';
+import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import URItem from './URItem';
 
-const RoleList = ({roles, onTodoClick}) => (
+const RoleList = ({roles, onRoleClick}) => (
   <List>
     <Subheader>Roles</Subheader>
     {roles.map(role =>
-      <URItem
+      <ListItem
         key={role.id}
-        itemName={role.name}
-        onClick={() => onTodoClick(role.id)}
+        primaryText={role.name}
+        onClick={e => onRoleClick(e, role.id)}
       />
     )}
   </List>
@@ -22,7 +21,7 @@ RoleList.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired).isRequired,
-  onTodoClick: PropTypes.func.isRequired
+  onRoleClick: PropTypes.func.isRequired
 };
 
 export default RoleList;

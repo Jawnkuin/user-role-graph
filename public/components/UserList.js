@@ -1,16 +1,15 @@
 import React, {PropTypes} from 'react';
-import List from 'material-ui/List';
+import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import URItem from './URItem';
 
-const UserList = ({users, onTodoClick}) => (
+const UserList = ({users, onUserClick}) => (
   <List>
     <Subheader>Users</Subheader>
     {users.map(user =>
-      <URItem
+      <ListItem
         key={user.id}
-        itemName={user.name}
-        onClick={() => onTodoClick(user.id)}
+        primaryText={user.name}
+        onClick={e => onUserClick(e, user)}
       />
     )}
   </List>
@@ -22,7 +21,7 @@ UserList.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired).isRequired,
-  onTodoClick: PropTypes.func.isRequired
+  onUserClick: PropTypes.func.isRequired
 };
 
 export default UserList;
